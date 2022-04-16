@@ -46,8 +46,6 @@
                 FROM $table
                 WHERE firstName LIKE '%$input[0]%' OR lastName LIKE '%$input[0]%';";
 
-                echo $sql;
-
                 $res = $connection->query($sql);
 
                 if($res->num_rows > 0) {
@@ -73,7 +71,7 @@
                             FROM Tv_Series
                             WHERE $table" ."ID"." = " . $row["ID"] . ";";
 
-                            echo $sql;
+                            
 
                             $res3 = $connection->query($sql); 
 
@@ -93,7 +91,7 @@
                 FROM $table
                 WHERE firstName LIKE '%$input[0]%' OR lastName LIKE '%$input[1]%';";
 
-                echo $sql;
+                
 
                 $res = $connection->query($sql);
 
@@ -183,7 +181,6 @@
             FROM genre
             WHERE genre LIKE '%$input%';";
 
-            echo $sql;
             $res = $connection->query($sql);
 
             if($res->num_rows > 0) {
@@ -201,7 +198,21 @@
                         while($row1 = $res2->fetch_assoc()) {
                             echo "<tr><td>".$row1["title"]."</td></tr>";   
                         }
-                    }
+		    }
+		    $sql = "SELECT title
+                    FROM Tv_Series
+                    WHERE genreID"." = " . $row["ID"] . ";";
+                        
+
+                    $res3 = $connection->query($sql);
+                        
+                    if($row2 = $res3->num_rows > 0) {
+                            
+
+                        while($row2 = $res3->fetch_assoc()) {
+                            echo "<tr><td>".$row2["title"]."</td></tr>";   
+                        }
+		    }
                 }
             }
         }
