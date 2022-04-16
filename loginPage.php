@@ -8,6 +8,12 @@
 </head>
 <body>
     <?php
+	
+    #To build the login page for my site I used this tutorial (https://www.tutorialrepublic.com/php-tutorial/php-mysql-login-system.php). 
+    #Due to the that fact, my code reuses a fair amount of logic and and statements found in the tutorial,
+    #though it's still modified to work with my code using my variables and database.
+    #this use was given the ok by Dr. Raahemifar
+	
     session_start();
 
     if(isset($_SESSION["li"]) && ($_SESSION["li"] === true)) {
