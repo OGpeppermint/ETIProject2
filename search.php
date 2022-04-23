@@ -118,8 +118,6 @@
                             FROM Tv_Series
                             WHERE $table" ."ID"." = " . $row["ID"] . ";";
 
-                            echo $sql;
-
                             $res3 = $connection->query($sql); 
 
 
