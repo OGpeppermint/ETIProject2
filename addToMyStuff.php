@@ -14,8 +14,7 @@
         require_once "login.php";
 
         $sql = "SELECT ID, title
-        FROM " .$_SESSION["addToMyStuffType"].
-        ";";
+        FROM ".$_SESSION["addToMyStuffType"].";";
 
         $res = $connection->query($sql);
 
