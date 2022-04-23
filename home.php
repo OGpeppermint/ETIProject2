@@ -7,19 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="myStuff.php" method="POST">
+    <form action="myStuff.php">
     <input type="submit" value="My Stuff"/>
     </form>
-    <form action="movies.php" method="POST">
+    <form action="movies.php">
     <input type="submit" value="Movies"/>
     </form>
-    <form action="tvShows.php" method="POST">
+    <form action="tvShows.php">
     <input type="submit" value="Tv Shows"/>
     </form>
-    <form action="search.php" method="POST">
+    <form action="search.php">
     <input type="submit" value="Search"/>
     </form>
-    <form action="logout.php" method="POST">
+    <form action="logout.php">
     <input type="submit" value="Log Out"/>
 </form>
 </body>
