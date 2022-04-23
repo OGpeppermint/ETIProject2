@@ -8,8 +8,39 @@
 </head>
 <body>
     <?php
+        session_start();
+
 
         require_once "login.php";
+
+        $sql = "SELECT ID, title
+        FROM tv_series;";
+
+        $res = $connection->query($sql);
+
+
+    ?>
+    <form method = "post">
+        <label for='chooseShow'>Choose Tv Show</label><br>
+        <select name = "chooseShow" id = "chooseShow">
+        <?php while($row = $res->fetch_assoc()) { ?>
+            <option value = "<?php echo $row["ID"];?>"><?php echo $row["title"];?></option>
+            <?php } ?>
+        </select>
+        <input type='submit' value='Submit'/>
+    </form>
+
+    <?php
+        if($_SERVER["REQUEST_METHOD"] == "POST") {
+            $input = $_POST["chooseShow"];
+
+            $_SESSION["seriesID"] = $input;
+
+            header("location: tvSeasons.php");
+        }
+    ?>
+    <?php
+
 
         $sql = "SELECT t.title, t.numOfSeasons, g.genre 
         FROM Tv_Series t
