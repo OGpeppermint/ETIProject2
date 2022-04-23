@@ -11,47 +11,43 @@
 
     session_start();
 
-    echo "<table><tr><th>Title</th></tr>";
+    echo "<table><tr><th>Title</th><th>Format</th><th>Genre</th></tr>";
 
     require_once "login.php";
 
 
-    $sql = "SELECT m.title
+
+
+    $sql = "SELECT m.title, 'Film' AS Type, g.genre
     FROM My_Stuff ms
-    LEFT JOIN Movie m ON m.ID = ms.MovieID
+    INNER JOIN Movie m ON m.ID = ms.MovieID
+    INNER JOIN genre g on m.genreID = g.ID
+    WHERE profileID = " .$_SESSION["profileID"]. "
+    
+    UNION
+    
+    SELECT ts.title, 'Tv Show' AS Type, g.genre
+    FROM My_Stuff ms
+    INNER JOIN Tv_Series ts ON ts.ID = ms.Tv_SeriesID
+    INNER JOIN genre g on ts.genreID = g.ID
+    WHERE profileID = " .$_SESSION["profileID"]. "
+    
+    UNION
+    
+    SELECT te.title, 'Tv Episode' AS Type, g.genre
+    FROM My_Stuff ms
+    INNER JOIN Tv_Episode te ON te.ID = ms.Tv_EpisodeID
+    INNER JOIN genre g on te.genreID = g.ID
     WHERE profileID = " .$_SESSION["profileID"]. ";";
+    
 
     $res = $connection->query($sql);
 
     if($res->num_rows > 0) {
         while($row = $res->fetch_assoc()) {
-            echo "<tr><td>".$row["title"]."</td></tr>";
-        }
-    }
-
-    $sql = "SELECT ts.title
-    FROM My_Stuff ms
-    LEFT JOIN Tv_Series ts ON ts.ID = ms.Tv_SeriesID
-    WHERE profileID = " .$_SESSION["profileID"]. ";";
-
-    $res = $connection->query($sql);
-
-    if($res->num_rows > 0) {
-        while($row = $res->fetch_assoc()) {
-            echo "<tr><td>".$row["title"]."</td></tr>";
-        }
-    }
-
-    $sql = "SELECT te.title
-    FROM My_Stuff ms
-    LEFT JOIN Tv_Episode te ON te.ID = ms.Tv_EpisodeID
-    WHERE profileID = " .$_SESSION["profileID"]. ";";
-
-    $res = $connection->query($sql);
-
-    if($res->num_rows > 0) {
-        while($row = $res->fetch_assoc()) {
-            echo "<tr><td>".$row["title"]."</td></tr>";
+            echo "<tr><td>".$row["title"]."</td>
+            <td>".$row["Type"]."</td>
+            <td>".$row["genre"]."</td></tr>";
         }
     }
     ?>
